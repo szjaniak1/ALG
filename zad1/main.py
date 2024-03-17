@@ -3,7 +3,11 @@ import sys
 from lib import *
 
 def main() -> int:
-    print(gauss_division(complex(2, 3), complex(3, 2)))
+    x = complex_gauss(6, 4)
+    y = complex_gauss(3, 2)
+    
+    q, r = x / y
+    print(q, r)
     return 0
 
 if __name__ == '__main__':
