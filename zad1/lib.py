@@ -58,16 +58,11 @@ def gcd(u: complex_gauss, v: complex_gauss) -> complex_gauss:
     if u.norm() < v.norm():
         return gcd(v, u)
 
-    u_cp = deepcopy(u)
-    v_cp = deepcopy(v)
+    if v.real == 0 and v.imag == 0:
+        return u
 
-    while True:
-        _, r = u_cp / v_cp
-        if r.real == 0 and r.imag == 0:
-            return v_cp
-
-        u_cp = v_cp
-        v_cp = r
+    _, r = u / v
+    return gcd(v, r)
 
 
 def lcm(u: complex_gauss, v: complex_gauss) -> complex_gauss:
