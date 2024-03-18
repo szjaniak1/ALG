@@ -1,4 +1,3 @@
-from copy import deepcopy
 from math import ceil, floor
 
 class complex_gauss():
