@@ -53,6 +53,7 @@ class complex_gauss():
             return '(' + str(self.real) + " + " + str(self.imag) + 'i)'
         return '(' + str(self.real) + " - " + str(abs(self.imag)) + 'i)'
 
+
 def gcd(u: complex_gauss, v: complex_gauss) -> complex_gauss:
     if u.norm() < v.norm():
         return gcd(v, u)
@@ -67,3 +68,9 @@ def gcd(u: complex_gauss, v: complex_gauss) -> complex_gauss:
 
         u_cp = v_cp
         v_cp = r
+
+
+def lcm(u: complex_gauss, v: complex_gauss) -> complex_gauss:
+    gcd_ = gcd(u, v)
+    mul = u * v
+    return (mul / gcd_)[0]
