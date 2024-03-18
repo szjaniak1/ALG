@@ -8,6 +8,7 @@ def main() -> int:
     
     q, r = x / y
     print(q, r)
+    print(gcd(x, y))
     return 0
 
 if __name__ == '__main__':

@@ -1,3 +1,4 @@
+from copy import deepcopy
 from math import ceil, floor
 
 class complex_gauss():
@@ -52,3 +53,17 @@ class complex_gauss():
             return '(' + str(self.real) + " + " + str(self.imag) + 'i)'
         return '(' + str(self.real) + " - " + str(abs(self.imag)) + 'i)'
 
+def gcd(u: complex_gauss, v: complex_gauss) -> complex_gauss:
+    if u.norm() < v.norm():
+        return gcd(v, u)
+
+    u_cp = deepcopy(u)
+    v_cp = deepcopy(v)
+
+    while True:
+        _, r = u_cp / v_cp
+        if r.real == 0 and r.imag == 0:
+            return v_cp
+
+        u_cp = v_cp
+        v_cp = r
