@@ -1,8 +1,6 @@
 from copy import deepcopy
 from typing import List
 
-import numpy
-
 class polynomial():
     def __init__(self, coeffs: List[int]) -> None:
         self._coeffs = coeffs

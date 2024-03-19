@@ -3,15 +3,14 @@ import sys
 from lib import *
 
 def main() -> int:
-    d = polynomial([6, 4])
-    z = polynomial([3, 2])
-    print(d + z)
-    print(d - z)
-    q, r = d / z
-    print(q)
-    print(r)
-    print(gcd(d, z))
-    print(lcm(d, z))
+    p1 = polynomial([1, 0, 1])
+    p2 = polynomial([1, 2, 1])
+
+    c_x = gcd(p1, p2)
+    d_x = lcm(p1, p2)
+
+    print(c_x)
+    print(d_x)
     return 0
 
 if __name__ == '__main__':
