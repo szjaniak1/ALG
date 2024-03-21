@@ -62,7 +62,7 @@ class polynomial():
 def gcd(x: polynomial, y: polynomial) -> polynomial:
     if x.deg < y.deg:
         return gcd(y, x)
-    if y.deg == 1:
+    if y.deg == 0:
         return x
     _, r = x / y
     return gcd(y, r)
