@@ -12,7 +12,7 @@ def test_sub() -> None:
     p1 = polynomial([3, 1, 1])
     p2 = polynomial([2, 2, 1])
     p3 = p1 - p2
-    assert p3.coeffs == [1, -1, 0]
+    assert p3.coeffs == [1, -1]
 
 def test_mul() -> None:
     p1 = polynomial([1, 2, 1])
@@ -33,6 +33,11 @@ def test_gcd() -> None:
     p3 = gcd(p2, p1)
     assert p3.coeffs == [1]
 
+    p1 = polynomial([6, 4])
+    p2 = polynomial([3, 2])
+    p3 = gcd(p1, p2)
+    assert p3.coeffs == [3, 2]
+
 def test_lcm() -> None:
     p1 = polynomial([1, 0, 1])
     p2 = polynomial([1, 2, 1])
@@ -42,10 +47,9 @@ def test_lcm() -> None:
 def test_gcd_ext() -> None:
     p1 = polynomial([1, 0, 1])
     p2 = polynomial([1, 2, 1])
-    p3, A, B  = gcd_ext(p2, p1)
-    print(p3)
-    print(A, B)
-    assert A * p1 + B * p2 == p3.coeffs
+    p3, A, B = gcd_ext(p2, p1)
+    res = A * p2 + B * p1
+    assert res.coeffs == p3.coeffs
 
 def main() -> int:
     test_add()
