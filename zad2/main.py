@@ -2,15 +2,61 @@ import sys
 
 from lib import *
 
-def main() -> int:
+def test_add() -> None:
+    p1 = polynomial([1, 2, 2])
+    p2 = polynomial([2, 1])
+    p3 = p1 + p2
+    assert p3.coeffs == [3, 3, 2]
+
+def test_sub() -> None:
+    p1 = polynomial([3, 1, 1])
+    p2 = polynomial([2, 2, 1])
+    p3 = p1 - p2
+    print(p3)
+    assert p3.coeffs == [1, -1, 0]
+
+def test_mul() -> None:
+    p1 = polynomial([1, 2, 1])
+    p2 = polynomial([1, 1])
+    p3 = p1 * p2
+    assert p3.coeffs == [1, 3, 3, 1]
+
+def test_div() -> None:
+    p1 = polynomial([5, 4, -3, 2])
+    p2 = polynomial([2, 1])
+    q, r = p1 / p2
+    print(q, r)
+    assert q.coeffs == [18, -7, 2]
+    assert r.coeffs == [-31]
+
+def test_gcd() -> None:
     p1 = polynomial([1, 0, 1])
     p2 = polynomial([1, 2, 1])
+    p3 = gcd(p2, p1)
+    assert p3.coeffs == [1]
 
-    c_x = gcd(p1, p2)
-    d_x = lcm(p1, p2)
+def test_lcm() -> None:
+    p1 = polynomial([1, 0, 1])
+    p2 = polynomial([1, 2, 1])
+    p3 = lcm(p2, p1)
+    assert p3.coeffs == [1, 2, 2, 2, 1]
 
-    print(c_x)
-    print(d_x)
+def test_gcd_ext() -> None:
+    p1 = polynomial([1, 0, 1])
+    p2 = polynomial([1, 2, 1])
+    p3, A, B  = gcd_ext(p2, p1)
+    print(p3)
+    print(A, B)
+    assert A * p1 + B * p2 == p3.coeffs
+
+def main() -> int:
+    test_add()
+    test_sub()
+    test_mul()
+    test_div()
+    test_gcd()
+    test_lcm()
+    test_gcd_ext() 
     return 0
 
 if __name__ == '__main__':
