@@ -12,7 +12,6 @@ def test_sub() -> None:
     p1 = polynomial([3, 1, 1])
     p2 = polynomial([2, 2, 1])
     p3 = p1 - p2
-    print(p3)
     assert p3.coeffs == [1, -1, 0]
 
 def test_mul() -> None:
@@ -25,7 +24,6 @@ def test_div() -> None:
     p1 = polynomial([5, 4, -3, 2])
     p2 = polynomial([2, 1])
     q, r = p1 / p2
-    print(q, r)
     assert q.coeffs == [18, -7, 2]
     assert r.coeffs == [-31]
 

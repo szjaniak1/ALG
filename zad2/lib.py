@@ -4,11 +4,11 @@ from typing import List
 import numpy
 
 class polynomial():
-    def __init__(self, coeffs: List[float]) -> None:
+    def __init__(self, coeffs: List[int]) -> None:
         self._coeffs = coeffs
 
     @property
-    def coeffs(self) -> List[float]:
+    def coeffs(self) -> List[int]:
         return self._coeffs
 
     @property
@@ -65,9 +65,10 @@ def gcd_ext(x: polynomial, y: polynomial) -> tuple[polynomial, polynomial, polyn
     if x.deg < y.deg:
         return gcd_ext(y, x)
     if not any(y.coeffs):
-        return x, polynomial([1]), polynomial([])
+        return x, polynomial([1]), polynomial([0])
 
     q, r = x / y
+    print(q, r)
     d, X, Y = gcd_ext(y, r)
     return d, Y, X - Y * q
 
