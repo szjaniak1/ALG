@@ -1,7 +1,8 @@
 import sys
 
+from itertools import product
 from typing import List
-from random import randrange
+from random import shuffle
 
 class set():
     def __init__(self, expo: int, value_func, border_func) -> None:
@@ -9,20 +10,12 @@ class set():
         self.border_func = border_func
         self.value_func = value_func
         
-    def gen_points(self, size: int, low_border: int, high_border: int) -> List:
-        res = []
-        if size > (high_border - low_border)**2:
-            return res
-        res_size = 0
-        while res_size < size:
-            p = []
-            for _ in range(self.expo):
-                p.append(randrange(low_border, high_border))
-            if p not in res and self.border_func(self.value_func(p)):
-                res.append(p)
-                res_size += 1
-
-        return res
+    def gen_points(self, low_border: int, high_border: int) -> List:
+        ranges_list = [range(low_border, high_border) for _ in range(self.expo)]
+        all_points = list(product(*ranges_list))
+        set_points = [point for point in all_points if self.border_func(self.value_func(point))]
+        shuffle(set_points)
+        return set_points
 
 def evaluate(point1: List[int], point2: List[int]) -> bool:
     for (x, y) in zip(point1, point2):
@@ -35,7 +28,6 @@ def find_minimal(points: List[List[int]]) -> List[List[int]]:
     flag = False
     for a in points:
         flag = True
-        print(minimal)
         for m in minimal:
             if evaluate(m, a):
                 points.remove(a)
@@ -63,7 +55,7 @@ def border2(value: int) -> bool:
 
 def main() -> int:
     s = set(2, func1, border)
-    points = s.gen_points(40, 0, 11)
+    points = s.gen_points(0, 15)
     minimal = find_minimal(points)
     print(minimal)
 
