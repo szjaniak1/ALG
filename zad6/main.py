@@ -3,6 +3,7 @@ import sys
 from itertools import product
 from typing import List
 from random import shuffle
+from copy import deepcopy
 
 class set():
     def __init__(self, expo: int, value_func, border_func) -> None:
@@ -25,19 +26,18 @@ def evaluate(point1: List[int], point2: List[int]) -> bool:
 
 def find_minimal(points: List[List[int]]) -> List[List[int]]:
     minimal = []
-    flag = False
+    flag = True
     for a in points:
-        flag = True
-        for m in minimal:
+        for m in list(minimal):
             if evaluate(m, a):
-                points.remove(a)
                 flag = False
                 break
             if evaluate(a, m):
                 minimal.remove(m)
         if flag:
-            minimal.append(a)
-            points.remove(a)
+            minimal.append(deepcopy(a))
+        else:
+            flag = True
         
     return minimal
 
@@ -58,7 +58,6 @@ def main() -> int:
     points = s.gen_points(0, 15)
     minimal = find_minimal(points)
     print(minimal)
-
     return 0
 
 if __name__ == '__main__':
