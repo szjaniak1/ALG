@@ -8,12 +8,6 @@ class set():
         self.expo = expo
         self.border_func = border_func
         self.value_func = value_func
-
-    def evaluate(self, point1: List[int], point2: List[int]) -> bool:
-        for (x, y) in zip(point1, point2):
-            if x > y:
-                return False
-        return True
         
     def gen_points(self, size: int, low_border: int, high_border: int) -> List:
         res = []
@@ -30,18 +24,24 @@ class set():
 
         return res
 
-def find_minimal(s: set, points: List[List[int]]) -> List[List[int]]:
+def evaluate(point1: List[int], point2: List[int]) -> bool:
+    for (x, y) in zip(point1, point2):
+        if x > y:
+            return False
+    return True
+
+def find_minimal(points: List[List[int]]) -> List[List[int]]:
     minimal = []
     flag = False
     for a in points:
         flag = True
         print(minimal)
         for m in minimal:
-            if s.evaluate(m, a):
+            if evaluate(m, a):
                 points.remove(a)
                 flag = False
                 break
-            if s.evaluate(a, m):
+            if evaluate(a, m):
                 minimal.remove(m)
         if flag:
             minimal.append(a)
@@ -64,8 +64,7 @@ def border2(value: int) -> bool:
 def main() -> int:
     s = set(2, func1, border)
     points = s.gen_points(40, 0, 11)
-    print(points)
-    minimal = find_minimal(s, points)
+    minimal = find_minimal(points)
     print(minimal)
 
     return 0
