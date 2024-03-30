@@ -35,12 +35,14 @@ def find_minimal(s: set, points: List[List[int]]) -> List[List[int]]:
     flag = False
     for a in points:
         flag = True
+        print(minimal)
         for m in minimal:
-            if s.evaluate(a, m):
+            if s.evaluate(m, a):
                 points.remove(a)
                 flag = False
                 break
-            minimal.remove(m)
+            if s.evaluate(a, m):
+                minimal.remove(m)
         if flag:
             minimal.append(a)
             points.remove(a)
